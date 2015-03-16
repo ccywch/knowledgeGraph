@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.link {
+  stroke: #ccc;
+}
+
+.node text {
+  pointer-events: none;
+  font: 10px sans-serif;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var width = 1500,
+    height = 2000
+	
+var color = d3.scale.category20();
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var force = d3.layout.force()
+    .gravity(.05)
+    .distance(100)
+    .charge(-100)
+    .size([width, height]);
+
+	
+var json = {
+ "nodes":[
+  {"name":"osx","group":0,"degree":5},
+  {"name":"twitter-bootstrap","group":1,"degree":5},
+  {"name":"excel","group":2,"degree":5},
+  {"name":"xcode","group":0,"degree":5},
+  {"name":"node.js","group":1,"degree":5},
+  {"name":"session","group":3,"degree":5},
+  {"name":"mysql","group":4,"degree":6},
+  {"name":"xml","group":5,"degree":5},
+  {"name":"java-ee","group":6,"degree":5},
+  {"name":"ruby-on-rails","group":7,"degree":7},
+  {"name":"flash","group":8,"degree":5},
+  {"name":"jar","group":6,"degree":5},
+  {"name":"forms","group":1,"degree":6},
+  {"name":"opencv","group":9,"degree":5},
+  {"name":"multithreading","group":5,"degree":5},
+  {"name":"database-design","group":4,"degree":5},
+  {"name":"css3","group":1,"degree":5},
+  {"name":"ipad","group":0,"degree":5},
+  {"name":"string","group":6,"degree":5},
+  {"name":"python","group":10,"degree":7},
+  {"name":"express","group":1,"degree":5},
+  {"name":"internet-explorer","group":1,"degree":5},
+  {"name":"facebook","group":11,"degree":5},
+  {"name":"cakephp","group":3,"degree":5},
+  {"name":"android","group":12,"degree":10},
+  {"name":"silverlight","group":5,"degree":5},
+  {"name":"qt","group":9,"degree":5},
+  {"name":"android-layout","group":12,"degree":5},
+  {"name":".net","group":5,"degree":6},
+  {"name":"list","group":10,"degree":5},
+  {"name":"c++","group":9,"degree":10},
+  {"name":"arrays","group":3,"degree":5},
+  {"name":"vector","group":9,"degree":5},
+  {"name":"css","group":1,"degree":7},
+  {"name":"asp.net-mvc-3","group":5,"degree":5},
+  {"name":"google-maps-api-3","group":1,"degree":5},
+  {"name":"div","group":1,"degree":5},
+  {"name":"listview","group":12,"degree":5},
+  {"name":"mod-rewrite","group":3,"degree":5},
+  {"name":"gridview","group":5,"degree":5},
+  {"name":"netbeans","group":6,"degree":5},
+  {"name":"spring","group":6,"degree":5},
+  {"name":"web-services","group":5,"degree":5},
+  {"name":"php","group":3,"degree":13},
+  {"name":"sql-server-2008","group":4,"degree":5},
+  {"name":"canvas","group":1,"degree":5},
+  {"name":"backbone.js","group":1,"degree":5},
+  {"name":"android-listview","group":12,"degree":5},
+  {"name":"actionscript-3","group":8,"degree":5},
+  {"name":"android-intent","group":12,"degree":5},
+  {"name":"sql-server-2005","group":4,"degree":5},
+  {"name":"sockets","group":6,"degree":5},
+  {"name":"generics","group":5,"degree":5},
+  {"name":"spring-mvc","group":6,"degree":5},
+  {"name":"boost","group":9,"degree":5},
+  {"name":"email","group":3,"degree":5},
+  {"name":"hibernate","group":6,"degree":5},
+  {"name":"dictionary","group":10,"degree":5},
+  {"name":"xslt","group":5,"degree":5},
+  {"name":"winapi","group":9,"degree":5},
+  {"name":"mysqli","group":3,"degree":5},
+  {"name":"javascript","group":1,"degree":13},
+  {"name":"matplotlib","group":10,"degree":5},
+  {"name":"maven","group":6,"degree":5},
+  {"name":"jquery-mobile","group":1,"degree":5},
+  {"name":"ajax","group":1,"degree":6},
+  {"name":"jdbc","group":6,"degree":5},
+  {"name":"html5","group":1,"degree":7},
+  {"name":"apache","group":3,"degree":5},
+  {"name":"layout","group":12,"degree":5},
+  {"name":"post","group":3,"degree":5},
+  {"name":"bash","group":9,"degree":5},
+  {"name":"google-chrome","group":1,"degree":5},
+  {"name":"c","group":9,"degree":6},
+  {"name":"postgresql","group":4,"degree":5},
+  {"name":"google-maps","group":1,"degree":5},
+  {"name":"vb.net","group":5,"degree":5},
+  {"name":"arraylist","group":6,"degree":5},
+  {"name":"google-app-engine","group":10,"degree":5},
+  {"name":"datagridview","group":5,"degree":5},
+  {"name":"pdo","group":3,"degree":5},
+  {"name":"django-models","group":10,"degree":5},
+  {"name":"swing","group":6,"degree":5},
+  {"name":"webview","group":12,"degree":5},
+  {"name":"visual-studio-2010","group":5,"degree":5},
+  {"name":"jquery-ajax","group":1,"degree":5},
+  {"name":"firefox","group":1,"degree":5},
+  {"name":"ruby-on-rails-3","group":7,"degree":5},
+  {"name":"android-widget","group":12,"degree":5},
+  {"name":"cocoa","group":0,"degree":5},
+  {"name":"jquery-ui","group":1,"degree":5},
+  {"name":"linux","group":9,"degree":5},
+  {"name":"table","group":1,"degree":5},
+  {"name":"ios5","group":0,"degree":5},
+  {"name":"ios4","group":0,"degree":5},
+  {"name":"select","group":4,"degree":5},
+  {"name":"regex","group":3,"degree":5},
+  {"name":"razor","group":5,"degree":5},
+  {"name":"git","group":13,"degree":5},
+  {"name":"java","group":6,"degree":14},
+  {"name":"codeigniter","group":3,"degree":5},
+  {"name":"opengl","group":9,"degree":5},
+  {"name":"android-fragments","group":12,"degree":5},
+  {"name":"core-data","group":0,"degree":5},
+  {"name":"heroku","group":7,"degree":5},
+  {"name":"angularjs","group":1,"degree":5},
+  {"name":"json","group":1,"degree":5},
+  {"name":"wordpress","group":3,"degree":5},
+  {"name":"iphone","group":0,"degree":8},
+  {"name":"uitableviewcell","group":0,"degree":5},
+  {"name":"numpy","group":10,"degree":5},
+  {"name":"data-binding","group":5,"degree":5},
+  {"name":"function","group":1,"degree":5},
+  {"name":"shell","group":9,"degree":5},
+  {"name":"iis","group":5,"degree":5},
+  {"name":"c#","group":5,"degree":15},
+  {"name":"xaml","group":5,"degree":5},
+  {"name":"vba","group":2,"degree":5},
+  {"name":"rspec","group":7,"degree":5},
+  {"name":"android-asynctask","group":12,"degree":5},
+  {"name":"oop","group":3,"degree":5},
+  {"name":"jquery-plugins","group":1,"degree":5},
+  {"name":"ruby","group":7,"degree":5},
+  {"name":"jquery","group":1,"degree":10},
+  {"name":"join","group":4,"degree":5},
+  {"name":"tomcat","group":6,"degree":5},
+  {"name":"python-3.x","group":10,"degree":5},
+  {"name":"stl","group":9,"degree":5},
+  {"name":".htaccess","group":3,"degree":5},
+  {"name":"pointers","group":9,"degree":5},
+  {"name":"dom","group":1,"degree":5},
+  {"name":"eclipse","group":12,"degree":5},
+  {"name":"excel-vba","group":2,"degree":5},
+  {"name":"asp.net-mvc-4","group":5,"degree":5},
+  {"name":"applet","group":6,"degree":5},
+  {"name":"winforms","group":5,"degree":5},
+  {"name":"zend-framework","group":3,"degree":5},
+  {"name":"iframe","group":1,"degree":5},
+  {"name":"activerecord","group":7,"degree":5},
+  {"name":"cocoa-touch","group":0,"degree":5},
+  {"name":"uiview","group":0,"degree":5},
+  {"name":"sqlite","group":12,"degree":5},
+  {"name":"uitableview","group":0,"degree":6},
+  {"name":"mvvm","group":5,"degree":5},
+  {"name":"flex","group":8,"degree":5},
+  {"name":"jpa","group":6,"degree":5},
+  {"name":"binding","group":5,"degree":5},
+  {"name":"android-emulator","group":12,"degree":5},
+  {"name":"objective-c","group":0,"degree":8},
+  {"name":"magento","group":3,"degree":5},
+  {"name":"file","group":6,"degree":5},
+  {"name":"jquery-selectors","group":1,"degree":5},
+  {"name":"curl","group":3,"degree":5},
+  {"name":"activity","group":12,"degree":5},
+  {"name":"facebook-graph-api","group":11,"degree":5},
+  {"name":"plsql","group":4,"degree":5},
+  {"name":"gcc","group":9,"degree":5},
+  {"name":"javascript-events","group":1,"degree":5},
+  {"name":"gwt","group":6,"degree":5},
+  {"name":"asp.net","group":5,"degree":6},
+  {"name":"sql-server","group":4,"degree":6},
+  {"name":"windows-phone-7","group":5,"degree":5},
+  {"name":"python-2.7","group":10,"degree":5},
+  {"name":"html","group":1,"degree":7},
+  {"name":"wcf","group":5,"degree":5},
+  {"name":"nhibernate","group":5,"degree":5},
+  {"name":"visual-studio","group":5,"degree":5},
+  {"name":"symfony2","group":3,"degree":5},
+  {"name":"templates","group":9,"degree":5},
+  {"name":"jsf","group":6,"degree":5},
+  {"name":"ios","group":0,"degree":8},
+  {"name":"c#-4.0","group":5,"degree":5},
+  {"name":"jsp","group":6,"degree":5},
+  {"name":"linq","group":5,"degree":5},
+  {"name":"sql","group":4,"degree":8},
+  {"name":"linq-to-sql","group":5,"degree":5},
+  {"name":"wpf","group":5,"degree":6},
+  {"name":"asp.net-mvc","group":5,"degree":6},
+  {"name":"tsql","group":4,"degree":5},
+  {"name":"class","group":9,"degree":5},
+  {"name":"github","group":13,"degree":5},
+  {"name":"reflection","group":5,"degree":5},
+  {"name":"c++11","group":9,"degree":5},
+  {"name":"database","group":4,"degree":5},
+  {"name":"windows","group":9,"degree":5},
+  {"name":"entity-framework","group":5,"degree":5},
+  {"name":"django","group":10,"degree":5},
+  {"name":"visual-c++","group":9,"degree":5},
+  {"name":"devise","group":7,"degree":5},
+  {"name":"oracle","group":4,"degree":5},
+  {"name":"servlets","group":6,"degree":5}
+ ],
+ "links":[
+  {"source":0,"target":89,"color":0},
+  {"source":0,"target":148,"color":0},
+  {"source":1,"target":123,"color":1},
+  {"source":1,"target":33,"color":1},
+  {"source":2,"target":132,"color":2},
+  {"source":2,"target":117,"color":2},
+  {"source":3,"target":148,"color":0},
+  {"source":3,"target":170,"color":0},
+  {"source":3,"target":108,"color":0},
+  {"source":4,"target":20,"color":1},
+  {"source":4,"target":61,"color":1},
+  {"source":5,"target":43,"color":3},
+  {"source":6,"target":183,"color":4},
+  {"source":6,"target":43,"color":3},
+  {"source":6,"target":124,"color":4},
+  {"source":6,"target":95,"color":4},
+  {"source":6,"target":174,"color":4},
+  {"source":7,"target":115,"color":5},
+  {"source":7,"target":58,"color":5},
+  {"source":8,"target":99,"color":6},
+  {"source":9,"target":87,"color":7},
+  {"source":9,"target":188,"color":7},
+  {"source":9,"target":138,"color":7},
+  {"source":9,"target":118,"color":7},
+  {"source":9,"target":104,"color":7},
+  {"source":9,"target":122,"color":7},
+  {"source":10,"target":48,"color":8},
+  {"source":11,"target":99,"color":6},
+  {"source":12,"target":123,"color":1},
+  {"source":12,"target":61,"color":1},
+  {"source":12,"target":163,"color":1},
+  {"source":12,"target":43,"color":3},
+  {"source":13,"target":30,"color":9},
+  {"source":14,"target":115,"color":5},
+  {"source":14,"target":99,"color":6},
+  {"source":15,"target":183,"color":4},
+  {"source":16,"target":163,"color":1},
+  {"source":16,"target":67,"color":1},
+  {"source":16,"target":33,"color":1},
+  {"source":17,"target":148,"color":0},
+  {"source":17,"target":170,"color":0},
+  {"source":17,"target":108,"color":0},
+  {"source":18,"target":99,"color":6},
+  {"source":19,"target":57,"color":10},
+  {"source":19,"target":126,"color":10},
+  {"source":19,"target":78,"color":10},
+  {"source":19,"target":29,"color":10},
+  {"source":19,"target":162,"color":10},
+  {"source":19,"target":62,"color":10},
+  {"source":19,"target":186,"color":10},
+  {"source":19,"target":110,"color":10},
+  {"source":21,"target":123,"color":1},
+  {"source":21,"target":61,"color":1},
+  {"source":21,"target":33,"color":1},
+  {"source":22,"target":154,"color":11},
+  {"source":23,"target":43,"color":3},
+  {"source":24,"target":141,"color":12},
+  {"source":24,"target":69,"color":12},
+  {"source":24,"target":27,"color":12},
+  {"source":24,"target":75,"color":1},
+  {"source":24,"target":49,"color":12},
+  {"source":24,"target":131,"color":12},
+  {"source":24,"target":147,"color":12},
+  {"source":24,"target":47,"color":12},
+  {"source":24,"target":119,"color":12},
+  {"source":24,"target":153,"color":12},
+  {"source":24,"target":83,"color":12},
+  {"source":24,"target":37,"color":12},
+  {"source":24,"target":102,"color":12},
+  {"source":24,"target":88,"color":12},
+  {"source":25,"target":115,"color":5},
+  {"source":26,"target":30,"color":9},
+  {"source":28,"target":115,"color":5},
+  {"source":28,"target":76,"color":5},
+  {"source":28,"target":135,"color":5},
+  {"source":28,"target":164,"color":5},
+  {"source":29,"target":115,"color":5},
+  {"source":30,"target":168,"color":9},
+  {"source":30,"target":127,"color":9},
+  {"source":30,"target":73,"color":9},
+  {"source":30,"target":32,"color":9},
+  {"source":30,"target":101,"color":9},
+  {"source":30,"target":184,"color":9},
+  {"source":30,"target":129,"color":9},
+  {"source":30,"target":187,"color":9},
+  {"source":30,"target":59,"color":9},
+  {"source":30,"target":182,"color":9},
+  {"source":30,"target":54,"color":9},
+  {"source":30,"target":179,"color":9},
+  {"source":31,"target":43,"color":3},
+  {"source":33,"target":123,"color":1},
+  {"source":33,"target":61,"color":1},
+  {"source":33,"target":163,"color":1},
+  {"source":33,"target":67,"color":1},
+  {"source":33,"target":36,"color":1},
+  {"source":34,"target":115,"color":5},
+  {"source":34,"target":97,"color":5},
+  {"source":34,"target":177,"color":5},
+  {"source":35,"target":75,"color":1},
+  {"source":35,"target":61,"color":1},
+  {"source":36,"target":163,"color":1},
+  {"source":38,"target":68,"color":3},
+  {"source":38,"target":128,"color":3},
+  {"source":39,"target":115,"color":5},
+  {"source":39,"target":159,"color":5},
+  {"source":40,"target":99,"color":6},
+  {"source":41,"target":53,"color":6},
+  {"source":41,"target":56,"color":6},
+  {"source":41,"target":99,"color":6},
+  {"source":42,"target":115,"color":5},
+  {"source":42,"target":99,"color":6},
+  {"source":43,"target":96,"color":3},
+  {"source":43,"target":100,"color":3},
+  {"source":43,"target":128,"color":3},
+  {"source":43,"target":60,"color":3},
+  {"source":43,"target":65,"color":1},
+  {"source":43,"target":152,"color":3},
+  {"source":43,"target":167,"color":3},
+  {"source":43,"target":80,"color":3},
+  {"source":43,"target":106,"color":1},
+  {"source":43,"target":149,"color":3},
+  {"source":43,"target":120,"color":3},
+  {"source":43,"target":136,"color":3},
+  {"source":43,"target":68,"color":3},
+  {"source":43,"target":107,"color":3},
+  {"source":43,"target":70,"color":3},
+  {"source":43,"target":55,"color":3},
+  {"source":44,"target":160,"color":4},
+  {"source":44,"target":178,"color":4},
+  {"source":44,"target":174,"color":4},
+  {"source":45,"target":61,"color":1},
+  {"source":45,"target":67,"color":1},
+  {"source":46,"target":61,"color":1},
+  {"source":48,"target":144,"color":8},
+  {"source":50,"target":160,"color":4},
+  {"source":50,"target":174,"color":4},
+  {"source":51,"target":99,"color":6},
+  {"source":52,"target":115,"color":5},
+  {"source":52,"target":99,"color":6},
+  {"source":53,"target":99,"color":6},
+  {"source":56,"target":145,"color":6},
+  {"source":56,"target":99,"color":6},
+  {"source":59,"target":184,"color":9},
+  {"source":61,"target":85,"color":1},
+  {"source":61,"target":86,"color":1},
+  {"source":61,"target":105,"color":1},
+  {"source":61,"target":157,"color":1},
+  {"source":61,"target":106,"color":1},
+  {"source":61,"target":163,"color":1},
+  {"source":61,"target":112,"color":1},
+  {"source":61,"target":65,"color":1},
+  {"source":61,"target":67,"color":1},
+  {"source":61,"target":90,"color":1},
+  {"source":61,"target":123,"color":1},
+  {"source":61,"target":72,"color":1},
+  {"source":61,"target":130,"color":1},
+  {"source":61,"target":75,"color":1},
+  {"source":61,"target":137,"color":1},
+  {"source":63,"target":99,"color":6},
+  {"source":64,"target":123,"color":1},
+  {"source":65,"target":123,"color":1},
+  {"source":65,"target":85,"color":1},
+  {"source":66,"target":99,"color":6},
+  {"source":67,"target":123,"color":1},
+  {"source":67,"target":163,"color":1},
+  {"source":68,"target":128,"color":3},
+  {"source":71,"target":113,"color":9},
+  {"source":71,"target":91,"color":9},
+  {"source":73,"target":129,"color":9},
+  {"source":73,"target":156,"color":9},
+  {"source":73,"target":91,"color":9},
+  {"source":74,"target":174,"color":4},
+  {"source":76,"target":159,"color":5},
+  {"source":77,"target":99,"color":6},
+  {"source":78,"target":99,"color":6},
+  {"source":79,"target":115,"color":5},
+  {"source":81,"target":186,"color":10},
+  {"source":82,"target":99,"color":6},
+  {"source":84,"target":115,"color":5},
+  {"source":85,"target":123,"color":1},
+  {"source":87,"target":122,"color":7},
+  {"source":89,"target":148,"color":0},
+  {"source":90,"target":123,"color":1},
+  {"source":91,"target":113,"color":9},
+  {"source":92,"target":163,"color":1},
+  {"source":93,"target":170,"color":0},
+  {"source":93,"target":108,"color":0},
+  {"source":94,"target":108,"color":0},
+  {"source":97,"target":177,"color":5},
+  {"source":98,"target":180,"color":13},
+  {"source":99,"target":145,"color":6},
+  {"source":99,"target":150,"color":6},
+  {"source":99,"target":190,"color":6},
+  {"source":99,"target":169,"color":6},
+  {"source":99,"target":172,"color":6},
+  {"source":99,"target":125,"color":6},
+  {"source":99,"target":131,"color":12},
+  {"source":99,"target":158,"color":6},
+  {"source":99,"target":134,"color":6},
+  {"source":103,"target":148,"color":0},
+  {"source":103,"target":170,"color":0},
+  {"source":103,"target":108,"color":0},
+  {"source":106,"target":123,"color":1},
+  {"source":108,"target":170,"color":0},
+  {"source":108,"target":148,"color":0},
+  {"source":108,"target":142,"color":0},
+  {"source":108,"target":139,"color":0},
+  {"source":109,"target":170,"color":0},
+  {"source":109,"target":142,"color":0},
+  {"source":111,"target":176,"color":5},
+  {"source":114,"target":159,"color":5},
+  {"source":115,"target":159,"color":5},
+  {"source":115,"target":161,"color":5},
+  {"source":115,"target":164,"color":5},
+  {"source":115,"target":165,"color":5},
+  {"source":115,"target":166,"color":5},
+  {"source":115,"target":116,"color":5},
+  {"source":115,"target":171,"color":5},
+  {"source":115,"target":173,"color":5},
+  {"source":115,"target":175,"color":5},
+  {"source":115,"target":176,"color":5},
+  {"source":115,"target":177,"color":5},
+  {"source":115,"target":181,"color":5},
+  {"source":115,"target":185,"color":5},
+  {"source":115,"target":133,"color":5},
+  {"source":115,"target":135,"color":5},
+  {"source":116,"target":176,"color":5},
+  {"source":117,"target":132,"color":2},
+  {"source":121,"target":123,"color":1},
+  {"source":123,"target":130,"color":1},
+  {"source":123,"target":163,"color":1},
+  {"source":123,"target":151,"color":1},
+  {"source":124,"target":174,"color":4},
+  {"source":133,"target":177,"color":5},
+  {"source":139,"target":148,"color":0},
+  {"source":139,"target":170,"color":0},
+  {"source":140,"target":170,"color":0},
+  {"source":142,"target":148,"color":0},
+  {"source":142,"target":170,"color":0},
+  {"source":143,"target":176,"color":5},
+  {"source":146,"target":176,"color":5},
+  {"source":148,"target":170,"color":0},
+  {"source":155,"target":189,"color":4},
+  {"source":159,"target":177,"color":5},
+  {"source":160,"target":178,"color":4},
+  {"source":160,"target":174,"color":4},
+  {"source":174,"target":183,"color":4},
+  {"source":174,"target":189,"color":4},
+  {"source":174,"target":178,"color":4}
+ ]
+}	;
+	
+	
+  //json = JSON.parse(jsondata)
+	
+  force
+      .nodes(json.nodes)
+      .links(json.links)
+      .start();
+
+  var link = svg.selectAll(".link")
+      .data(json.links)
+    .enter().append("line")
+	 .style("stroke", function(d) { return color(d.color); })
+      .attr("class", "link");
+	
+
+  var node = svg.selectAll(".node")
+      .data(json.nodes)
+	  .enter().append("g")
+      .attr("class", "node")
+      .call(force.drag)
+	  .on('mouseover', connectedNodes)
+	  .on('mouseout', allNodes); 
+
+  node.append("circle")
+    .attr("r", function(d) { return d.degree;})
+    .style("fill", function (d) {return color(d.group);console.log(d.group)})
+	
+  node.append("text")
+      .attr("dx", 3)           //It means the offset of label and circle
+      .attr("dy", ".35em")
+      .text(function(d) { return d.name })
+      .style("font-size",function(d) { return d.degree*2+'px' })
+	  .style("stroke", "gray");  
+	  
+	  
+	  
+  force.on("tick", function() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  });
+  
+ 
+  var linkedByIndex = {};
+  for (i = 0; i < json.nodes.length; i++) 
+  {
+     linkedByIndex[i + "," + i] = 1;
+  };
+  
+  json.links.forEach(
+   function (d) {
+    linkedByIndex[d.source.index + "," + d.target.index] = 1;
+   });
+
+   //This function looks up whether a pair are neighbours
+  function neighboring(a, b) {
+    
+    return linkedByIndex[a.index + "," + b.index];
+  }
+  
+  function connectedNodes() {
+        //Reduce the opacity of all but the neighbouring nodes
+        d = d3.select(this).node().__data__;
+        console.log(d.name);
+		node.style("opacity", function (o) {
+            return neighboring(d, o) | neighboring(o, d) ? 1 : 0.1;
+        });
+        link.style("opacity", function (o) {
+            return d.index==o.source.index | d.index==o.target.index ? 1 : 0.1;
+        });
+          
+}
+  function allNodes()
+  { node.style("opacity", 1);
+    link.style("opacity", 1);}
+  
+
+
+
+//---End Insert---
+
+</script>
